@@ -2,13 +2,35 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ToolMitra — Free AdSense Readiness Checker</title>
-<meta name="description" content="Run a free preliminary AdSense readiness check. Review technical SEO, website policies, content quality and navigation with a detailed report.">
+<title>Free AdSense Readiness Checker | ToolMitra</title>
+<meta name="description" content="Check your website's preliminary AdSense readiness with ToolMitra. Review SEO, privacy policy, content quality, crawlability and navigation with a free detailed report.">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolMitra">
+<meta property="og:title" content="Free AdSense Readiness Checker | ToolMitra">
+<meta property="og:description" content="Run a free preliminary website review covering technical SEO, policies, content quality and visitor experience.">
+<meta property="og:url" content="/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Free AdSense Readiness Checker | ToolMitra">
+<meta name="twitter:description" content="Review your website's preliminary AdSense readiness with a free detailed checklist.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ToolMitra AdSense Readiness Checker",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "description": "A free preliminary website review tool for technical SEO, policy pages, content quality and navigation.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+  "publisher": { "@type": "Organization", "name": "ToolMitra" }
+}
+</script>
 <style>
 :root{--green:#15966a;--green2:#0a7654;--navy:#14233d;--muted:#68788f;--line:#e1e8f0;--bg:#f5f8fc;--pass:#16a05a;--warn:#dc8500;--fail:#df3030;--info:#718096}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--navy);background:#fff;font-family:Arial,Helvetica,sans-serif}button,input{font:inherit}
-header{height:74px;position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(4%,calc((100% - 1160px)/2))}
+header{height:74px;position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:22px;padding:0 max(4%,calc((100% - 1160px)/2))}
+.brand a{color:var(--navy);text-decoration:none}.top-nav{display:flex;align-items:center;gap:25px;margin-left:auto}.top-nav>a,.tools-dropdown>summary{color:#40516a;text-decoration:none;font-size:14px;font-weight:750;cursor:pointer;list-style:none}.tools-dropdown>summary::-webkit-details-marker{display:none}.tools-dropdown{position:relative}.tools-dropdown>summary span{font-size:12px;color:var(--green);margin-left:5px}.tools-panel{position:absolute;top:34px;left:-16px;width:260px;padding:9px;background:#fff;border:1px solid var(--line);border-radius:13px;box-shadow:0 16px 40px #14233d18;display:grid;gap:3px}.tools-panel a{padding:11px 12px;color:var(--navy);text-decoration:none;border-radius:8px;font-size:13px;font-weight:700}.tools-panel a:hover{background:#eef8f3;color:var(--green2)}.tools-panel small{display:block;color:#8995a6;font-weight:500;margin-top:3px}.menu-btn{display:none}
 .brand{font-size:30px;font-weight:850;letter-spacing:-1.6px;color:var(--navy)}.brand span{color:var(--green)}
 .menu-btn{width:48px;height:46px;border:1px solid var(--line);border-radius:13px;background:#fff;display:grid;place-content:center;gap:5px;cursor:pointer}.menu-btn span{width:22px;height:2.5px;border-radius:3px;background:var(--navy);display:block}
 .backdrop{position:fixed;inset:74px 0 0;background:#14233d66;z-index:18;opacity:0;visibility:hidden;transition:.2s}.menu{position:fixed;right:0;top:74px;bottom:0;width:min(390px,88vw);background:#fff;z-index:19;padding:25px 22px;overflow:auto;transform:translateX(105%);transition:.22s;box-shadow:-14px 10px 40px #14233d22}.menu-open .backdrop{opacity:1;visibility:visible}.menu-open .menu{transform:translateX(0)}.menu h3{font-size:12px;color:#8995a6;text-transform:uppercase;letter-spacing:.13em;margin:5px 10px 14px}.menu a{display:flex;justify-content:space-between;gap:10px;padding:14px 12px;border-radius:10px;text-decoration:none;color:var(--navy);font-weight:700}.menu a:hover,.menu a.active{background:#eaf7f1;color:var(--green2)}.menu small{font-size:11px;color:#8a96a8}.menu hr{border:0;border-top:1px solid var(--line);margin:15px 0}
@@ -76,11 +98,27 @@ header{height:74px;position:sticky;top:0;z-index:20;background:#fff;border-botto
 
 .below{padding:48px 0;background:#f4f7fb}.below h2{margin:0 0 10px;font-size:26px}.below p{color:var(--muted);line-height:1.7;max-width:850px}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}.feature{background:#fff;border:1px solid var(--line);border-radius:13px;padding:18px}.feature b{display:block;margin-bottom:7px}.feature span{font-size:13px;color:var(--muted);line-height:1.6}footer{background:#111f36;color:#b6c2d1;text-align:center;padding:26px;font-size:13px}footer strong{color:#fff}footer a{color:#dbe6f3;text-decoration:none;margin:0 9px}
 @media(max-width:800px){.hero{grid-template-columns:1fr;gap:28px;padding:50px 0}.hero h1{font-size:48px}.overview{grid-template-columns:1fr;text-align:center}.stats{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){header{height:66px}.backdrop{top:66px}.menu{top:66px}.brand{font-size:27px}.wrap{padding:0 17px}.hero{padding:42px 0}.hero h1{font-size:40px;letter-spacing:-1.7px}.hero p{font-size:16px}.scan-card{padding:20px}.report{padding:0 13px}.report-head{align-items:flex-start;flex-direction:column}.report-head h2{font-size:24px}.summary-card,.section-card{padding:19px}.gauge{width:178px;height:178px}.gauge-inner{width:146px;height:146px}.gauge b{font-size:46px}.domain{font-size:22px}.stats{gap:8px}.stat{padding:12px}.stat b{font-size:25px}.cat-row{font-size:14px}.cat-row span:last-child{font-size:11px}.features{grid-template-columns:1fr}}
+@media(max-width:850px){header{padding:0 18px}.top-nav{gap:13px}.top-nav>a,.tools-dropdown>summary{font-size:12px}}
+@media(max-width:650px){header{height:auto;min-height:66px;flex-wrap:wrap;padding:10px 17px}.top-nav{order:3;width:100%;justify-content:space-between;gap:8px;padding:5px 0 2px}.top-nav>a,.tools-dropdown>summary{font-size:11px}.tools-panel{left:0;top:28px;width:min(260px,85vw)}}
+@media(max-width:520px){header{height:auto;min-height:66px}.backdrop{top:66px}.menu{top:66px}.brand{font-size:27px}.wrap{padding:0 17px}.hero{padding:42px 0}.hero h1{font-size:40px;letter-spacing:-1.7px}.hero p{font-size:16px}.scan-card{padding:20px}.report{padding:0 13px}.report-head{align-items:flex-start;flex-direction:column}.report-head h2{font-size:24px}.summary-card,.section-card{padding:19px}.gauge{width:178px;height:178px}.gauge-inner{width:146px;height:146px}.gauge b{font-size:46px}.domain{font-size:22px}.stats{gap:8px}.stat{padding:12px}.stat b{font-size:25px}.cat-row{font-size:14px}.cat-row span:last-child{font-size:11px}.features{grid-template-columns:1fr}}
 @media print{header,.hero,.below,footer,.menu,.backdrop,.actions,.filters,#checkForm,.scan-head{display:none!important}body{background:#fff!important;color:#111}.wrap{display:none!important}#results{display:block!important;background:#fff!important;padding:0!important}.report{max-width:none;padding:0}.summary-card,.section-card{box-shadow:none;break-inside:avoid;border:1px solid #ddd}.check-item,.fix-item{break-inside:avoid}.gauge{print-color-adjust:exact;-webkit-print-color-adjust:exact}.bar i,.status-pill{print-color-adjust:exact;-webkit-print-color-adjust:exact}.disclaimer{break-inside:avoid}}
 </style></head>
 <body>
-<header><div class="brand"><span>Tool</span>Mitra</div><button class="menu-btn" id="menuBtn" aria-label="Open tools menu" aria-expanded="false"><span></span><span></span><span></span></button></header>
+<header>
+<div class="brand"><a href="/" aria-label="ToolMitra home"><span>Tool</span>Mitra</a></div>
+<nav class="top-nav" aria-label="Main navigation">
+<details class="tools-dropdown"><summary>Tools <span aria-hidden="true">▾</span></summary>
+<div class="tools-panel">
+<a href="/#checker">AdSense Readiness Checker</a>
+<a href="/#coming">SEO Audit Checker <small>Coming soon</small></a>
+<a href="/#coming">Website Health Checker <small>Coming soon</small></a>
+<a href="/#coming">Meta Tags Checker <small>Coming soon</small></a>
+<a href="/#coming">Sitemap &amp; Robots Checker <small>Coming soon</small></a>
+</div></details>
+<a href="/about.html">About</a><a href="/privacy-policy.html">Privacy Policy</a><a href="/contact.html">Contact Us</a>
+</nav>
+<button class="menu-btn" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</header>
 <div class="backdrop" id="backdrop"></div>
 <aside class="menu" id="menu"><h3>ToolMitra tools</h3>
 <a class="active" href="#checker">AdSense Approval Checker <small>Available</small></a><hr>
@@ -103,7 +141,7 @@ header{height:74px;position:sticky;top:0;z-index:20;background:#fff;border-botto
 </div></section>
 <section class="below" id="coming"><div class="wrap"><h2>What does this checker review?</h2><p>ToolMitra checks public technical and website-structure signals that may help identify common gaps. A strong score does not guarantee AdSense approval. Google also evaluates original content, usefulness, site quality, navigation, account eligibility and programme policies.</p><div class="features"><div class="feature"><b>Technical &amp; SEO</b><span>HTTPS, security headers, titles, metadata, crawl settings, sitemap and indexability.</span></div><div class="feature"><b>Pages &amp; policies</b><span>Privacy, About, Contact, terms and visible cookie / advertising disclosures.</span></div><div class="feature"><b>Content &amp; experience</b><span>Content-depth signals, headings, images, navigation and sampled internal links.</span></div></div><p id="about" style="font-size:12px">ToolMitra is an independent website utility. It is not affiliated with, endorsed by or connected to Google or Google AdSense.</p></div></section>
 </main>
-<footer><strong>ToolMitra</strong> · Independent website guidance · © 2026<br><br><a href="#about">About</a><a href="#about">Disclaimer</a><a href="#checker">AdSense Checker</a></footer>
+<footer><strong>ToolMitra</strong> · Independent website guidance · © 2026<br><br><a href="/about.html">About</a><a href="/privacy-policy.html">Privacy Policy</a><a href="/contact.html">Contact Us</a><a href="#checker">AdSense Checker</a></footer>
 <script>
 const $=id=>document.getElementById(id),menuBtn=$("menuBtn"),menu=$("menu"),backdrop=$("backdrop");
 function setMenu(open){document.body.classList.toggle("menu-open",open);menuBtn.setAttribute("aria-expanded",String(open));}
