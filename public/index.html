@@ -117,12 +117,8 @@ header{height:74px;position:sticky;top:0;z-index:20;background:#fff;border-botto
 </div></details>
 <a href="/about.html">About</a><a href="/privacy-policy.html">Privacy Policy</a><a href="/contact.html">Contact Us</a>
 </nav>
-<button class="menu-btn" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
+
 </header>
-<div class="backdrop" id="backdrop"></div>
-<aside class="menu" id="menu"><h3>ToolMitra tools</h3>
-<a class="active" href="#checker">AdSense Approval Checker <small>Available</small></a><hr>
-<a href="#coming">SEO Audit Checker <small>Coming soon</small></a><a href="#coming">Website Health Checker <small>Coming soon</small></a><a href="#coming">Meta Tags Checker <small>Coming soon</small></a><a href="#coming">Sitemap Checker <small>Coming soon</small></a><a href="#coming">Robots.txt Checker <small>Coming soon</small></a><a href="#coming">Broken Links Checker <small>Coming soon</small></a><a href="#coming">Page Speed Checker <small>Coming soon</small></a><a href="#coming">Mobile-Friendly Checker <small>Coming soon</small></a><a href="#coming">SSL &amp; Security Checker <small>Coming soon</small></a><hr><a href="#about">About ToolMitra</a></aside>
 <main>
 <div class="wrap"><section class="hero">
 <div><div class="eyebrow">Free independent website check</div><h1>Is your website ready for <em>AdSense?</em></h1><p>Review technical SEO, important policy pages, content signals and visitor experience. Get a detailed score, priority fixes and a practical report before you apply.</p><div class="trust"><span>Free to use</span><span>No signup required</span><span>Detailed checklist</span></div></div>
@@ -143,9 +139,7 @@ header{height:74px;position:sticky;top:0;z-index:20;background:#fff;border-botto
 </main>
 <footer><strong>ToolMitra</strong> · Independent website guidance · © 2026<br><br><a href="/about.html">About</a><a href="/privacy-policy.html">Privacy Policy</a><a href="/contact.html">Contact Us</a><a href="#checker">AdSense Checker</a></footer>
 <script>
-const $=id=>document.getElementById(id),menuBtn=$("menuBtn"),menu=$("menu"),backdrop=$("backdrop");
-function setMenu(open){document.body.classList.toggle("menu-open",open);menuBtn.setAttribute("aria-expanded",String(open));}
-menuBtn.addEventListener("click",()=>setMenu(menuBtn.getAttribute("aria-expanded")!=="true"));backdrop.addEventListener("click",()=>setMenu(false));menu.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>setMenu(false)));document.addEventListener("keydown",e=>{if(e.key==="Escape")setMenu(false);});
+const $=id=>document.getElementById(id);
 let reportData=null,currentFilter="all";
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const statusName=s=>({pass:"PASSED",warning:"WARNING",fail:"FAILED",info:"MANUAL REVIEW"}[s]||s);
