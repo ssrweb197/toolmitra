@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="/toolmitra-icon.svg">
+<title>Free JSON Formatter & Validator – Beautify, Minify | ToolMitra</title>
+<meta name="description" content="Format, beautify, validate and minify JSON online for free. Get clear syntax errors, copy formatted JSON or download it. Runs locally in your browser.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website"><meta property="og:title" content="Free JSON Formatter & Validator | ToolMitra"><meta property="og:description" content="Beautify, validate and minify JSON with helpful error messages. Free browser-based developer tool.">
+<style>
+:root{--green:#15966a;--green-dark:#0a7654;--navy:#14233d;--muted:#68788f;--line:#e1e8f0;--bg:#f5f8fc}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--navy);background:#fff}header{min-height:70px;padding:14px max(4%,calc((100% - 1120px)/2));display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid var(--line)}.brand{font-size:28px;font-weight:850;letter-spacing:-1px;text-decoration:none;color:var(--navy)}.brand span{color:var(--green)}nav{display:flex;gap:18px;flex-wrap:wrap}nav a{font-size:13px;font-weight:700;text-decoration:none;color:#40516a}nav a:hover{color:var(--green-dark)}
+main{max-width:1120px;margin:38px auto 60px;padding:0 22px}.eyebrow{font-size:11px;font-weight:850;letter-spacing:.15em;text-transform:uppercase;color:var(--green-dark)}h1{font-size:clamp(32px,5vw,48px);letter-spacing:-1.7px;margin:12px 0}.intro{max-width:820px;color:var(--muted);font-size:16px;line-height:1.7}.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin-top:24px;box-shadow:0 12px 35px #14233d0a}.panel h2{font-size:19px;margin:0 0 15px}
+textarea{display:block;width:100%;min-height:360px;resize:vertical;padding:17px;border:1px solid #d9e2eb;border-radius:12px;background:#111f36;color:#e4f1f8;font:13px/1.65 Consolas,Monaco,monospace;tab-size:2;outline:none}textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px #15966a18}.toolbar{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0}.btn{border:0;border-radius:9px;padding:12px 15px;font-weight:800;cursor:pointer;background:#eaf6f0;color:var(--green-dark)}.btn.primary{background:var(--green);color:#fff}.btn.primary:hover{background:var(--green-dark)}.btn:disabled{opacity:.5;cursor:not-allowed}.options{display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:13px}.options select{padding:9px;border:1px solid var(--line);border-radius:8px;color:var(--navy);background:#fff}.status{display:flex;align-items:flex-start;gap:9px;padding:13px 15px;border-radius:10px;margin-top:14px;font-size:13px;line-height:1.55;background:#f0f5fa;color:#40516a}.status.good{background:#eaf7ef;color:#17663f}.status.bad{background:#fff0ef;color:#a52c2c}.status[hidden]{display:none}.metrics{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--muted)}.metrics b{color:var(--navy)}.content{margin-top:24px}.content h2{font-size:22px}.content h3{font-size:16px;margin-top:22px}.content p,.content li{color:#596b80;line-height:1.75}.faq{border-top:1px solid var(--line);padding:15px 0}.faq h3{margin:0 0 7px}.faq p{margin:0}.privacy{font-size:12px;background:#eff8f3;padding:13px;border-radius:10px;color:#315c49;line-height:1.6;margin-top:16px}
+footer{text-align:center;background:#111f36;color:#c4ceda;padding:26px;font-size:13px}footer a{color:#fff;text-decoration:none;margin:0 9px}
+@media(max-width:760px){header{align-items:flex-start;flex-direction:column}nav{gap:12px}textarea{min-height:300px}}@media(max-width:480px){main{padding:0 15px;margin-top:28px}.panel{padding:16px}.toolbar .btn{flex:1 1 42%}textarea{font-size:12px;min-height:260px}}
+</style></head>
+<body>
+<header><a class="brand" href="/"><span>Tool</span>Mitra</a><nav aria-label="Main navigation"><a href="/">Home</a><a href="/tools/seo-audit.html">SEO Audit</a><a href="/tools/qr-code-generator.html">QR Generator</a><a href="/tools/image-compressor.html">Image Compressor</a></nav></header>
+<main>
+<div class="eyebrow">Free browser-based developer utility</div>
+<h1>JSON Formatter &amp; Validator</h1>
+<p class="intro">Make JSON easier to read, check whether it is valid, or compress it into a compact single line. Format API responses, configuration files and structured data directly in your browser.</p>
+<section class="panel">
+<h2>Enter your JSON</h2>
+<textarea id="source" spellcheck="false" aria-label="JSON input" placeholder='Paste JSON here, for example: {"name":"ToolMitra","free":true}'></textarea>
+<div class="toolbar">
+<button class="btn primary" id="format">Format / Beautify</button>
+<button class="btn" id="validate">Validate</button>
+<button class="btn" id="minify">Minify</button>
+<button class="btn" id="sample">Load sample</button>
+<button class="btn" id="clear">Clear</button>
+</div>
+<div class="options"><label for="indent">Indentation</label><select id="indent"><option value="2">2 spaces</option><option value="4">4 spaces</option><option value="tab">Tab</option></select><span>Formatting preserves JSON values and structure.</span></div>
+<div id="status" class="status" role="status" aria-live="polite" hidden></div>
+<div class="metrics"><span>Characters: <b id="chars">0</b></span><span>Lines: <b id="lines">0</b></span><span>Size: <b id="bytes">0 B</b></span></div>
+<div class="toolbar"><button class="btn" id="copy" disabled>Copy result</button><button class="btn" id="download" disabled>Download .json</button></div>
+</section>
+<div class="privacy">Privacy: JSON is parsed and formatted in your browser. The text you enter is not uploaded to ToolMitra or sent to an external formatting API.</div>
+<section class="panel content">
+<h2>How to use the JSON formatter</h2>
+<ol><li>Paste or type your JSON into the editor.</li><li>Choose 2 spaces, 4 spaces or tabs for indentation.</li><li>Select <b>Format / Beautify</b> to make it readable, <b>Validate</b> to check syntax, or <b>Minify</b> to remove unnecessary whitespace.</li><li>Copy the result or download it as a .json file.</li></ol>
+<h3>What is JSON?</h3>
+<p>JSON (JavaScript Object Notation) is a text format commonly used to exchange structured data between applications and APIs. It supports objects, arrays, strings, numbers, booleans and null values. JSON requires double quotes around property names and strings, and it does not allow comments or trailing commas.</p>
+<h3>Frequently asked questions</h3>
+<div class="faq"><h3>Does this tool send my JSON to a server?</h3><p>No. Validation and formatting use your browser's built-in JSON parser. Your input stays in the current browser page.</p></div>
+<div class="faq"><h3>Why does my JSON show a syntax error?</h3><p>Common causes include missing commas or quotation marks, single quotes, trailing commas, comments and unmatched braces or brackets. The error message may include a position to help you locate the issue.</p></div>
+<div class="faq"><h3>Does minifying JSON change its data?</h3><p>Minifying removes formatting whitespace while keeping the parsed JSON data structure and values. It does not rename fields or change values.</p></div>
+</section>
+</main>
+<footer><b>ToolMitra</b> · Your Free Toolkit for the Web<br><br><a href="/">Home</a><a href="/about.html">About</a><a href="/privacy-policy.html">Privacy</a><a href="/contact.html">Contact</a></footer>
+<script>
+const $=id=>document.getElementById(id);let lastResult=null;
+const sample='{
+  "project": "ToolMitra",
+  "audience": ["developers", "creators", "small businesses"],
+  "features": {
+    "free": true,
+    "tools": 12,
+    "formats": ["JSON", "URL", "text"]
+  },
+  "rating": 4.8,
+  "notes": null
+}';
+function updateMetrics(){const s=$("source").value;$("chars").textContent=s.length.toLocaleString();$("lines").textContent=s?s.split(/\r\n|\r|\n/).length:0;$("bytes").textContent=new Blob([s]).size.toLocaleString()+" B";}
+function showStatus(message,type){$("status").hidden=false;$("status").className="status "+type;$("status").textContent=message;}
+function parse(){const raw=$("source").value;if(!raw.trim())throw new Error("Paste or type JSON before running this action.");try{return JSON.parse(raw);}catch(e){const match=String(e.message).match(/position\s+(\d+)/i);let detail=e.message;if(match){const pos=Number(match[1]);const before=raw.slice(0,pos);const line=before.split("\n").length;const column=pos-(before.lastIndexOf("\n")+1)+1;detail+=" (around line "+line+", column "+column+")";}throw new Error(detail);}}
+function indentation(){const v=$("indent").value;return v==="tab"?"\t":Number(v);}
+function setResult(value,message,type){lastResult=value;$("source").value=value;updateMetrics();$("copy").disabled=false;$("download").disabled=false;showStatus(message,type);}
+$("format").addEventListener("click",()=>{try{const data=parse();setResult(JSON.stringify(data,null,indentation()),"Valid JSON — formatted successfully.","good");}catch(e){lastResult=null;$("copy").disabled=true;$("download").disabled=true;showStatus(e.message,"bad");}});
+$("validate").addEventListener("click",()=>{try{parse();lastResult=$("source").value;$("copy").disabled=false;$("download").disabled=false;showStatus("Valid JSON — no syntax errors found.","good");}catch(e){lastResult=null;$("copy").disabled=true;$("download").disabled=true;showStatus(e.message,"bad");}});
+$("minify").addEventListener("click",()=>{try{const data=parse();setResult(JSON.stringify(data),"Valid JSON — minified successfully.","good");}catch(e){lastResult=null;$("copy").disabled=true;$("download").disabled=true;showStatus(e.message,"bad");}});
+$("sample").addEventListener("click",()=>{$("source").value=sample;lastResult=null;$("copy").disabled=true;$("download").disabled=true;updateMetrics();showStatus("Sample JSON loaded. Choose Format or Validate to try the tool.","");});
+$("clear").addEventListener("click",()=>{$("source").value="";lastResult=null;$("copy").disabled=true;$("download").disabled=true;$("status").hidden=true;updateMetrics();$("source").focus();});
+$("source").addEventListener("input",()=>{lastResult=null;$("copy").disabled=true;$("download").disabled=true;$("status").hidden=true;updateMetrics();});
+$("copy").addEventListener("click",async()=>{if(lastResult===null)return;try{await navigator.clipboard.writeText(lastResult);showStatus("Result copied to clipboard.","good");}catch{showStatus("Clipboard access is unavailable. Select the text in the editor and copy it manually.","bad");}});
+$("download").addEventListener("click",()=>{if(lastResult===null)return;const blob=new Blob([lastResult],{type:"application/json;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="formatted.json";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);showStatus("JSON file download started.","good");});
+updateMetrics();
+</script>
+</body></html>
