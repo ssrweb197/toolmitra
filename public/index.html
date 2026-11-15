@@ -91,7 +91,7 @@ header{height:74px;position:sticky;top:0;z-index:20;background:#fff;border-botto
 <div class="scan-card" id="checker"><div class="scan-head"><strong>AdSense readiness scan</strong><span class="free">● FREE CHECK</span></div><form id="checkForm"><label for="siteUrl">Your website URL</label><input id="siteUrl" type="url" placeholder="https://yourwebsite.com" required><button class="primary" id="checkBtn">Check AdSense readiness&nbsp; →</button></form><p class="note">We review publicly accessible pages and signals. The scan samples a limited number of internal links; it is a preliminary guide, not a Google decision.</p><div class="mini"><div><b>35+</b><small>Review points</small></div><div><b>5</b><small>Categories</small></div><div><b>Free</b><small>No account</small></div></div></div>
 </section></div>
 <section id="results" aria-live="polite"><div class="report">
-<div class="report-head"><h2>AdSense readiness report</h2><div class="actions"><button class="action solid" id="pdfBtn">↓ Export PDF report</button><button class="action" id="anotherBtn">Check another site</button></div></div>
+<div class="report-head"><h2>AdSense readiness report</h2><div class="actions"><button class="action solid" id="pdfBtn" title="Open the print dialog and choose Save as PDF">↓ Download PDF</button><button class="action" id="shareBtn">Share report</button><button class="action" id="copyBtn">Copy summary</button><button class="action" id="anotherBtn">Check another site</button></div><span id="actionFeedback" role="status" aria-live="polite" style="font-size:12px;color:#0a7654"></span></div>
 <div class="summary-card" id="summaryCard">
 <div class="result-banner"><div class="rb-copy"><div class="rb-kicker">TOOLMITRA WEBSITE AUDIT</div><h2>Website health snapshot</h2><h3 class="domain" id="domain">Website</h3><p class="summary-text" id="summary"></p><span class="status-pill" id="readiness">Scanning</span><div class="scanned" id="scanned"></div></div><div class="score-box" id="gauge"><strong id="score">—</strong><span>HEALTH SCORE</span><small>/ 100</small></div></div>
 <div class="stats"><div class="stat"><b id="passed">0</b><span>Checks passed</span></div><div class="stat warning"><b id="warnings">0</b><span>Warnings</span></div><div class="stat fail"><b id="failed">0</b><span>Failed checks</span></div><div class="stat info"><b id="info">0</b><span>Manual review</span></div></div></div>
@@ -114,7 +114,7 @@ const statusName=s=>({pass:"PASSED",warning:"WARNING",fail:"FAILED",info:"MANUAL
 function renderReport(d,url){
  reportData=d;$("results").style.display="block";$("score").textContent=d.score;$("gauge").style.setProperty("--score",d.score+"%");$("readiness").textContent=d.readiness;$("readiness").className="status-pill "+(d.readiness==="Not Ready"?"bad":d.score>=85&&!d.counts.failed?"good":"");$("domain").textContent=new URL(url).hostname;$("summary").textContent=d.summary;$("passed").textContent=d.counts.passed;$("warnings").textContent=d.counts.warnings;$("failed").textContent=d.counts.failed;$("info").textContent=d.counts.info;
  const dt=new Date(d.scannedAt);$("scanned").textContent="Scanned "+dt.toLocaleString()+" · Homepage response "+d.loadTimeMs+" ms · "+d.totalPages+" estimated page URLs";
- $("categories").innerHTML=d.categoryStats.map(c=>'<div class="category"><div class="cat-row"><span>'+esc(c.category)+'</span><span>'+c.passed+'/'+(c.total-c.info)+' passed · '+c.percent+'%</span></div><div class="bar"><i class="'+(c.percent<60?"low":c.percent<80?"mid":"")+'" style="width:'+c.percent+'%"></i></div></div>').join("");
+ $("categories").innerHTML=d.categoryStats.map(c=>'<div class="category"><div class="cat-row"><span>'+esc(c.category)+'</span><span>'+c.passed+' passed · '+c.warnings+' warning'+(c.warnings===1?"":"s")+(c.failed? " · "+c.failed+" failed":"")+' · '+c.percent+'% weighted</span></div><div class="bar"><i class="'+(c.percent<60?"low":c.percent<80?"mid":"")+'" style="width:'+c.percent+'%"></i></div></div>').join("");
  $("fixes").innerHTML=d.fixesFirst.length?d.fixesFirst.map((x,i)=>'<div class="fix-item"><div class="fix-num">'+(i+1)+'</div><div><b>'+esc(x.label)+' <span class="priority">'+esc(x.priority)+" priority</span></b><p>"+esc(x.detail)+"</p>"+(x.status!=="pass"&&x.fix?'<div class="howto"><strong>How to fix:</strong> '+esc(x.fix)+'</div>':"")+'</div></div>').join(""):'<p>No automated warnings or failures were found. Please still review manual items below.</p>';
  $("disclaimer").textContent=d.disclaimer;currentFilter="all";document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter==="all"));renderChecks();$("results").scrollIntoView({behavior:"smooth",block:"start"});
 }
@@ -130,6 +130,58 @@ $("checkForm").addEventListener("submit",async e=>{
  catch(err){$("summary").textContent=err.message;$("readiness").textContent="Scan unavailable";$("score").textContent="—";}
  finally{btn.disabled=false;btn.textContent="Check AdSense readiness  →";}
 });
-$("pdfBtn").addEventListener("click",()=>window.print());
+function buildShareSummary(){
+ const host=$("domain").textContent||"Website";
+ const scanned=$("scanned").textContent||"";
+ const fixes=(reportData?.fixesFirst||[]).slice(0,3).map((x,i)=>(i+1)+". "+x.label+" — "+x.detail).join("\n");
+ return [
+  "ToolMitra — AdSense readiness report",
+  "Website: "+host,
+  "Health score: "+$("score").textContent+"/100",
+  "Result: "+$("readiness").textContent,
+  "Checks: "+$("passed").textContent+" passed, "+$("warnings").textContent+" warnings, "+$("failed").textContent+" failed, "+$("info").textContent+" manual review",
+  scanned,
+  fixes?"Priority items:\n"+fixes:"",
+  "This is an automated preliminary check, not a Google AdSense approval prediction.",
+  "Check with ToolMitra: "+window.location.origin
+ ].filter(Boolean).join("\n");
+}
+async function copyReportSummary(){
+ const text=buildShareSummary();
+ try{
+  if(navigator.clipboard?.writeText) await navigator.clipboard.writeText(text);
+  else{
+   const area=document.createElement("textarea");area.value=text;area.style.position="fixed";area.style.opacity="0";document.body.appendChild(area);area.select();
+   const copied=document.execCommand("copy");area.remove();if(!copied)throw new Error("Copy unavailable");
+  }
+  $("actionFeedback").textContent="Report summary copied. You can paste it into WhatsApp or another app.";
+ }catch{
+  $("actionFeedback").textContent="Copy is unavailable in this browser. Please use Share report.";
+ }
+}
+$("pdfBtn").addEventListener("click",()=>{
+ const previous=currentFilter;
+ currentFilter="all";
+ document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter==="all"));
+ renderChecks();
+ $("actionFeedback").textContent="In the print screen, choose Save as PDF to download the complete report.";
+ window.addEventListener("afterprint",()=>{
+  currentFilter=previous;
+  document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter===previous));
+  renderChecks();
+  $("actionFeedback").textContent="";
+ },{once:true});
+ window.print();
+});
+$("shareBtn").addEventListener("click",async()=>{
+ const text=buildShareSummary();
+ if(navigator.share){
+  try{await navigator.share({title:"ToolMitra website audit report",text});$("actionFeedback").textContent="Share sheet opened.";}
+  catch(error){if(error.name!=="AbortError")$("actionFeedback").textContent="Sharing was not completed. You can use Copy summary instead.";}
+ }else{
+  await copyReportSummary();
+ }
+});
+$("copyBtn").addEventListener("click",copyReportSummary);
 $("anotherBtn").addEventListener("click",()=>{$("siteUrl").value="";$("results").style.display="none";$("checker").scrollIntoView({behavior:"smooth",block:"center"});$("siteUrl").focus();});
 </script></body></html>
