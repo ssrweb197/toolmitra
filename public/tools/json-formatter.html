@@ -51,7 +51,7 @@ footer{text-align:center;background:#111f36;color:#c4ceda;padding:26px;font-size
 <footer><b>ToolMitra</b> · Your Free Toolkit for the Web<br><br><a href="/">Home</a><a href="/about.html">About</a><a href="/privacy-policy.html">Privacy</a><a href="/contact.html">Contact</a></footer>
 <script>
 const $=id=>document.getElementById(id);let lastResult=null;
-const sample='{
+const sample=`{
   "project": "ToolMitra",
   "audience": ["developers", "creators", "small businesses"],
   "features": {
@@ -61,7 +61,7 @@ const sample='{
   },
   "rating": 4.8,
   "notes": null
-}';
+}`;
 function updateMetrics(){const s=$("source").value;$("chars").textContent=s.length.toLocaleString();$("lines").textContent=s?s.split(/\r\n|\r|\n/).length:0;$("bytes").textContent=new Blob([s]).size.toLocaleString()+" B";}
 function showStatus(message,type){$("status").hidden=false;$("status").className="status "+type;$("status").textContent=message;}
 function parse(){const raw=$("source").value;if(!raw.trim())throw new Error("Paste or type JSON before running this action.");try{return JSON.parse(raw);}catch(e){const match=String(e.message).match(/position\s+(\d+)/i);let detail=e.message;if(match){const pos=Number(match[1]);const before=raw.slice(0,pos);const line=before.split("\n").length;const column=pos-(before.lastIndexOf("\n")+1)+1;detail+=" (around line "+line+", column "+column+")";}throw new Error(detail);}}
