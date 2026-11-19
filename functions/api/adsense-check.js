@@ -127,8 +127,38 @@ export async function onRequestPost({ request }) {
   };
 
   await handler({ body }, responseAdapter);
-  return Response.json(payload, {
-    status: statusCode,
-    headers: { "Cache-Control": "no-store" }
+  const origin = request.headers.get("Origin") || "";
+  const allowed = new Set([
+    "https://ssrweb197.github.io",
+    "https://toolmitra.pages.dev"
+  ]);
+  const corsHeaders = {
+    "Cache-Control": "no-store",
+    "Vary": "Origin",
+    ...(allowed.has(origin) ? {
+      "Access-Control-Allow-Origin": origin,
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type"
+    } : {})
+  };
+  return Response.json(payload, { status: statusCode, headers: corsHeaders });
+}
+
+export async function onRequestOptions({ request }) {
+  const origin = request.headers.get("Origin") || "";
+  const allowed = new Set([
+    "https://ssrweb197.github.io",
+    "https://toolmitra.pages.dev"
+  ]);
+  if (!allowed.has(origin)) return new Response(null, { status: 403 });
+  return new Response(null, {
+    status: 204,
+    headers: {
+      "Access-Control-Allow-Origin": origin,
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Max-Age": "86400",
+      "Vary": "Origin"
+    }
   });
 }
