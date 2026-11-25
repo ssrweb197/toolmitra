@@ -35,4 +35,23 @@ const months=monthly>0?PAYOUT_THRESHOLD_INR/monthly:Infinity;document.getElement
 sites.forEach((s,i)=>{const pct=weighted?raw[i]/weighted*100:0;document.getElementById('views'+i+'-val').textContent=count(s.views);document.getElementById('share'+i).textContent=pct.toFixed(1)+'%';document.getElementById('revenue'+i).textContent=fmt(monthly*pct/100);document.getElementById('bar'+i).style.width=pct+'%';document.getElementById('stack'+(i+1)).style.width=pct+'%'});}
 render();
 })();
+</script><style id="tm-related-style">
+.tm-related{margin:26px 0;padding:18px;border:1px solid #dce8e2;border-radius:15px;background:linear-gradient(135deg,#f2fbf6,#f4f7ff)}
+.tm-related h2{font-size:18px;margin:0 0 12px;color:#14233d}
+.tm-related .tm-links{display:flex;flex-wrap:wrap;gap:9px}
+.tm-related a{display:inline-block;background:#fff;border:1px solid #dce8e2;border-radius:10px;padding:10px 12px;text-decoration:none;color:#176247;font-size:13px;font-weight:700}
+.tm-related button{border:1px solid #b8d9c8;background:#fff;color:#176247;border-radius:9px;padding:9px 12px;font-weight:700;cursor:pointer}
+.tm-related .tm-note{font-size:12px;color:#68788f;margin:8px 0 12px}
+</style>
+<script id="tm-related-script">
+(()=>{const path=location.pathname,slug=path.split('/').pop().replace('.html','');if(!path.startsWith('/tools/'))return;
+const items=[['seo-audit','SEO Audit Checker','/tools/seo-audit.html'],['website-health','Website Health Checker','/tools/website-health.html'],['meta-tags','Meta Tags Checker','/tools/meta-tags.html'],['sitemap-robots','Sitemap & Robots Checker','/tools/sitemap-robots.html'],['keyword-density','Keyword Density Checker','/tools/keyword-density.html'],['og-preview','Open Graph Preview','/tools/og-preview.html'],['schema-generator','Schema Markup Generator','/tools/schema-generator.html'],['adsense-portfolio-estimator','AdSense Portfolio Estimator','/tools/adsense-portfolio-estimator.html'],['image-compressor','Image Compressor','/tools/image-compressor.html'],['json-formatter','JSON Formatter','/tools/json-formatter.html'],['word-counter','Word Counter','/tools/word-counter.html'],['text-case-converter','Text Case Converter','/tools/text-case-converter.html']];
+const read=k=>{try{return JSON.parse(localStorage.getItem(k)||'[]')}catch{return[]}},write=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
+let recent=read('toolmitra-recent-v1').filter(x=>x!==path);recent.unshift(path);write('toolmitra-recent-v1',recent.slice(0,6));let fav=read('toolmitra-favorites-v1');const current=items.find(x=>x[2]===path);if(!current)return;
+const map={'seo-audit':['website-health','meta-tags','keyword-density'],'website-health':['seo-audit','sitemap-robots','schema-generator'],'meta-tags':['og-preview','seo-audit','text-case-converter'],'og-preview':['meta-tags','schema-generator','seo-audit'],'keyword-density':['word-counter','seo-audit','meta-tags'],'sitemap-robots':['website-health','seo-audit','schema-generator'],'schema-generator':['seo-audit','website-health','meta-tags'],'adsense-portfolio-estimator':['seo-audit','website-health','meta-tags'],'image-compressor':['text-case-converter','word-counter','json-formatter'],'json-formatter':['text-case-converter','word-counter','seo-audit'],'word-counter':['text-case-converter','keyword-density','meta-tags'],'text-case-converter':['word-counter','keyword-density','meta-tags']};
+const el=document.createElement('section');el.className='tm-related';el.innerHTML='<h2>⭐ Save this tool</h2><p class="tm-note">Your favourites and recently used tools are saved only in this browser.</p><button type="button" id="tm-fav"></button><h2 style="margin-top:20px">✨ Try next</h2><div class="tm-links" id="tm-links"></div>';
+const btn=el.querySelector('#tm-fav');const refresh=()=>{btn.textContent=fav.includes(path)?'♥ Saved to favourites':'♡ Add to favourites'};btn.addEventListener('click',()=>{fav=read('toolmitra-favorites-v1');fav=fav.includes(path)?fav.filter(x=>x!==path):[...fav,path];write('toolmitra-favorites-v1',fav);refresh()});refresh();
+(map[slug]||['seo-audit','word-counter','text-case-converter']).map(k=>items.find(x=>x[0]===k)).filter(Boolean).forEach(x=>{const a=document.createElement('a');a.href=x[2];a.textContent=x[1]+' →';el.querySelector('#tm-links').append(a)});
+const footer=document.querySelector('footer');if(footer)footer.parentNode.insertBefore(el,footer);else document.querySelector('main')?.append(el);
+})();
 </script></body></html>
