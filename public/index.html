@@ -116,6 +116,31 @@ header{height:74px;position:sticky;top:0;z-index:20;background:#fff;border-botto
 
 /* ToolMitra homepage tool discovery */
 .tm-home-tools{padding:54px 0 62px;background:#f5f8fc;border-top:1px solid #e5ebf2}.tm-home-tools .tm-inner{max-width:1160px;margin:auto;padding:0 24px}.tm-home-tools h2{font-size:clamp(25px,3vw,34px);letter-spacing:-.7px;margin:0 0 9px;color:#14233d}.tm-home-tools .tm-lead{margin:0 0 25px;color:#68788f;line-height:1.65}.tm-tool-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.tm-tool-card{display:block;padding:19px;background:#fff;border:1px solid #e1e8f0;border-radius:15px;text-decoration:none;color:#14233d;box-shadow:0 7px 22px #14233d08;transition:transform .18s,border-color .18s}.tm-tool-card:hover{transform:translateY(-3px);border-color:#15966a}.tm-tool-card .tm-icon{font-size:25px;display:block;margin-bottom:10px}.tm-tool-card b{display:block;font-size:15px;margin-bottom:6px}.tm-tool-card small{display:block;color:#68788f;line-height:1.5;font-size:12px}.tm-home-actions{display:flex;justify-content:space-between;align-items:center;gap:14px;margin:24px 0 0;flex-wrap:wrap}.tm-view-all{display:inline-block;background:#15966a;color:#fff;text-decoration:none;padding:12px 17px;border-radius:10px;font-size:13px;font-weight:800}.tm-home-subsection{margin-top:38px}.tm-home-subsection[hidden]{display:none}@media(max-width:760px){.tm-tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tm-home-tools{padding:40px 0}.tm-tool-card{padding:15px}}@media(max-width:440px){.tm-tool-grid{grid-template-columns:1fr}}
+
+/* Mobile hamburger navigation */
+.menu-btn{display:none}
+.tm-menu-backdrop{position:fixed;inset:0;background:rgba(12,27,47,.48);z-index:80;opacity:0;visibility:hidden;transition:opacity .22s,visibility .22s}
+.tm-mobile-menu{position:fixed;z-index:81;top:0;right:0;bottom:0;width:min(340px,86vw);padding:20px 18px;background:#fff;box-shadow:-15px 0 40px #14233d24;overflow-y:auto;transform:translateX(105%);transition:transform .24s ease}
+.tm-menu-open .tm-menu-backdrop{opacity:1;visibility:visible}
+.tm-menu-open .tm-mobile-menu{transform:translateX(0)}
+.tm-menu-head{display:flex;justify-content:space-between;align-items:center;padding:5px 4px 18px;margin-bottom:8px;border-bottom:1px solid var(--line);font-size:20px}
+.tm-menu-head button{width:38px;height:38px;border:0;border-radius:10px;background:#eef7f2;color:var(--navy);font-size:27px;line-height:1;cursor:pointer}
+.tm-mobile-menu>a,.tm-mobile-tools>summary{display:flex;justify-content:space-between;align-items:center;padding:14px 12px;margin:3px 0;border-radius:10px;text-decoration:none;color:var(--navy);font-size:15px;font-weight:750;list-style:none;cursor:pointer}
+.tm-mobile-menu>a:hover,.tm-mobile-tools>summary:hover{background:#eaf7f1;color:var(--green2)}
+.tm-mobile-tools>summary::-webkit-details-marker{display:none}
+.tm-mobile-tools>summary span{color:var(--green);font-size:18px}
+.tm-mobile-tools[open]>summary{background:#eaf7f1;color:var(--green2)}
+.tm-mobile-tools>a{display:block;padding:10px 15px 10px 25px;color:#52637a;text-decoration:none;font-size:13px;border-left:2px solid #d8eee3;margin-left:15px}
+.tm-menu-note{margin:22px 10px 5px;padding:14px;border-radius:12px;background:#f0f8f4;color:#087b54;font-size:12px;font-weight:700;text-align:center}
+@media(min-width:651px){.menu-btn{display:none!important}}
+@media(max-width:650px){
+  header{height:66px!important;min-height:66px!important;flex-wrap:nowrap!important;justify-content:space-between!important;padding:0 17px!important}
+  .top-nav{display:none!important}
+  .menu-btn{display:grid!important;flex:0 0 46px;width:46px;height:44px;border:1px solid var(--line);border-radius:12px;background:#fff;place-content:center;gap:5px;margin-left:auto}
+  .menu-btn span{display:block;width:22px;height:2.5px;border-radius:3px;background:var(--navy)}
+  body.tm-menu-open{overflow:hidden}
+}
+
 </style>  <meta name="google-site-verification" content="at-Vs7IHz7yNWeQheID5grHQKL-FY39okOE-QiLDeRo" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8708174869828941"
      crossorigin="anonymous"></script>
@@ -144,8 +169,26 @@ header{height:74px;position:sticky;top:0;z-index:20;background:#fff;border-botto
 </div></details>
 <a href="/guides/">Guides</a><a href="/about.html">About</a><a href="/privacy-policy.html">Privacy Policy</a><a href="/contact.html">Contact Us</a><a href="/terms-and-conditions.html">Terms &amp; Conditions</a>
 </nav>
-
+<button class="menu-btn" id="tmMenuBtn" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="tmMobileMenu">
+  <span></span><span></span><span></span>
+</button>
 </header>
+<div class="tm-menu-backdrop" id="tmMenuBackdrop"></div>
+<aside class="tm-mobile-menu" id="tmMobileMenu" aria-hidden="true">
+  <div class="tm-menu-head"><strong>Menu</strong><button type="button" id="tmMenuClose" aria-label="Close menu">×</button></div>
+  <a class="tm-menu-main" href="/">Home</a>
+  <details class="tm-mobile-tools">
+    <summary>Tools <span>＋</span></summary>
+    <a href="/#checker">AdSense Readiness Checker</a>
+    <a href="/tools.html">All Tools</a>
+  </details>
+  <a href="/guides/">Guides</a>
+  <a href="/about.html">About Us</a>
+  <a href="/privacy-policy.html">Privacy Policy</a>
+  <a href="/contact.html">Contact Us</a>
+  <a href="/terms-and-conditions.html">Terms &amp; Conditions</a>
+  <div class="tm-menu-note">ToolMitra – Smart Tools. Simple Solutions.</div>
+</aside>
 <main>
 <div class="wrap"><section class="hero">
 <div><div class="eyebrow">Free independent website check</div><h1>Is your website ready for <em>AdSense?</em></h1><p>Review technical SEO, important policy pages, content signals and visitor experience. Get a detailed score, priority fixes and a practical report before you apply.</p><div class="trust"><span>Free to use</span><span>No signup required</span><span>Detailed checklist</span></div></div>
@@ -264,4 +307,17 @@ $("anotherBtn").addEventListener("click",()=>{$("siteUrl").value="";$("results")
 (()=>{const menu=document.querySelector(".tools-dropdown");if(!menu)return;const close=()=>menu.removeAttribute("open");menu.querySelectorAll(".tools-panel a").forEach(link=>link.addEventListener("click",close));document.addEventListener("click",event=>{if(!menu.contains(event.target))close();});document.addEventListener("keydown",event=>{if(event.key==="Escape"){close();menu.querySelector("summary")?.focus();}});window.addEventListener("scroll",close,{passive:true});})();
 </script>
 <script id="tm-home-recent-script">(()=>{const catalog=[['seo-audit','SEO Audit Checker','/tools/seo-audit.html','🔎','Review key SEO signals and find practical improvements for your website.'],['website-health','Website Health Checker','/tools/website-health.html','🌐','Check common website health, security and technical signals.'],['meta-tags','Meta Tags Checker','/tools/meta-tags.html','🏷️','Inspect page titles, descriptions and social metadata.'],['sitemap-robots','Sitemap & Robots Checker','/tools/sitemap-robots.html','🗺️','Review sitemap and robots.txt basics.'],['keyword-density','Keyword Density Checker','/tools/keyword-density.html','🔑','Review keyword usage in your content.'],['og-preview','Open Graph Preview','/tools/og-preview.html','🔗','Preview social sharing metadata.'],['schema-generator','Schema Markup Generator','/tools/schema-generator.html','🧩','Create structured data markup for supported page types.'],['adsense-portfolio-estimator','AdSense Portfolio Estimator','/tools/adsense-portfolio-estimator.html','📈','Explore a preliminary website portfolio estimate.'],['image-compressor','Image Compressor','/tools/image-compressor.html','🖼️','Resize and optimize images in your browser.'],['json-formatter','JSON Formatter','/tools/json-formatter.html','{}','Format, validate and minify JSON.'],['word-counter','Word Counter','/tools/word-counter.html','📝','Count words, characters and reading time.'],['text-case-converter','Text Case Converter','/tools/text-case-converter.html','🔠','Convert text to uppercase, lowercase, title case and more.']];try{const recent=JSON.parse(localStorage.getItem('toolmitra-recent-v1')||'[]');const items=recent.map(p=>catalog.find(x=>x[2]===p)).filter(Boolean).slice(0,3);if(!items.length)return;const wrap=document.getElementById('tm-home-recent'),list=document.getElementById('tm-home-recent-list');items.forEach(x=>{const a=document.createElement('a');a.className='tm-tool-card';a.href=x[2];const icon=document.createElement('span');icon.className='tm-icon';icon.textContent=x[3];const title=document.createElement('b');title.textContent=x[1];const desc=document.createElement('small');desc.textContent=x[4];a.append(icon,title,desc);list.append(a)});wrap.hidden=false;}catch(e){/* Recent tools are optional; homepage remains usable if storage is unavailable. */}})();</script>
+
+<script id="tm-mobile-navigation">
+(()=> {
+ const body=document.body,openBtn=document.getElementById("tmMenuBtn"),closeBtn=document.getElementById("tmMenuClose"),backdrop=document.getElementById("tmMenuBackdrop"),drawer=document.getElementById("tmMobileMenu");
+ if(!openBtn||!closeBtn||!backdrop||!drawer)return;
+ const open=()=>{body.classList.add("tm-menu-open");openBtn.setAttribute("aria-expanded","true");drawer.setAttribute("aria-hidden","false");closeBtn.focus();};
+ const close=()=>{body.classList.remove("tm-menu-open");openBtn.setAttribute("aria-expanded","false");drawer.setAttribute("aria-hidden","true");openBtn.focus();};
+ openBtn.addEventListener("click",open);closeBtn.addEventListener("click",close);backdrop.addEventListener("click",close);
+ drawer.querySelectorAll("a").forEach(a=>a.addEventListener("click",close));
+ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&body.classList.contains("tm-menu-open"))close();});
+})();
+</script>
+
 </body></html>
